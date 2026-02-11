@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import { getMovieDetails, MovieDetails } from "../../services/api";
+import WatchlistButton from "@/components/WatchlistButton";
 
 const MovieDetailsPage = () => {
     const router = useRouter();
@@ -93,10 +94,14 @@ const MovieDetailsPage = () => {
                         </h1>
 
                         {movie.tagline && (
-                            <p className="text-xl md:text-3xl italic text-blue-400 font-semibold mb-6 drop-shadow-lg max-w-4xl">
+                            <p className="text-xl md:text-3xl italic text-blue-400 font-semibold mb-8 drop-shadow-lg max-w-4xl">
                                 {movie.tagline}
                             </p>
                         )}
+
+                        <div className="flex flex-wrap gap-4">
+                            <WatchlistButton movie={movie} />
+                        </div>
                     </div>
                 </div>
 
