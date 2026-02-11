@@ -60,24 +60,24 @@ const MovieDetailsPage = () => {
                 <meta name="description" content={movie.overview} />
             </Head>
 
-            {/* Hero Backdrop Section - Naturally full width now */}
-            <section className="relative h-[70vh] md:h-[90vh] overflow-hidden bg-gray-900">
+            {/* Section 1: Cinematic Backdrop Hero */}
+            <section className="relative h-[60vh] md:h-[75vh] w-full overflow-hidden bg-gray-900">
                 {movie.backdrop_path && (
                     <Image
                         src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
                         alt={movie.title}
                         fill
                         priority
-                        className="object-cover opacity-60 dark:opacity-50"
+                        className="object-cover opacity-60 dark:opacity-40"
                     />
                 )}
                 {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/40 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/20 to-transparent"></div>
 
-                {/* Hero Content - Moved up to clear the poster overlap */}
-                <div className="absolute inset-x-0 bottom-0 pb-32 md:pb-64 px-4 sm:px-6 lg:px-8">
-                    <div className="max-w-7xl mx-auto">
-                        <div className="flex flex-wrap items-center gap-3 mb-6">
+                {/* Hero Content - Clean Alignment */}
+                <div className="absolute inset-0 flex items-end pb-12">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+                        <div className="flex flex-wrap items-center gap-3 mb-4">
                             <span className="bg-yellow-500 text-black font-extrabold px-3 py-1 rounded-md text-sm shadow-lg">
                                 ★ {movie.vote_average.toFixed(1)}
                             </span>
@@ -89,12 +89,12 @@ const MovieDetailsPage = () => {
                             </span>
                         </div>
 
-                        <h1 className="text-5xl md:text-8xl font-black mb-6 drop-shadow-3xl tracking-tighter text-white">
+                        <h1 className="text-4xl md:text-7xl font-black mb-4 drop-shadow-2xl tracking-tighter text-white">
                             {movie.title}
                         </h1>
 
                         {movie.tagline && (
-                            <p className="text-xl md:text-3xl italic text-blue-400 font-semibold mb-8 drop-shadow-lg max-w-4xl">
+                            <p className="text-lg md:text-2xl italic text-blue-400 font-semibold mb-6 drop-shadow-lg max-w-4xl">
                                 {movie.tagline}
                             </p>
                         )}
@@ -116,12 +116,13 @@ const MovieDetailsPage = () => {
                 </button>
             </section>
 
-            {/* Details Section - Added Container */}
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 animate-in fade-in slide-in-from-bottom-5 duration-1000">
-                <div className="flex flex-col md:flex-row gap-12">
-                    {/* Poster Column */}
-                    <div className="w-full md:w-1/3 lg:w-1/4 flex-shrink-0">
-                        <div className="relative h-[480px] w-full rounded-2xl overflow-hidden shadow-2xl border border-gray-100/10 dark:border-gray-800 transform -mt-24 md:-mt-56 z-10 transition-transform hover:scale-[1.02] duration-500 ring-1 ring-white/10">
+            {/* Section 2: Details Grid - Standard Container */}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 animate-in fade-in slide-in-from-bottom-5 duration-1000">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+
+                    {/* Left Column: Poster - No more negative margin overlap */}
+                    <div className="md:col-span-1">
+                        <div className="relative h-[450px] md:h-[550px] w-full rounded-2xl overflow-hidden shadow-2xl border border-gray-100/10 dark:border-gray-800 ring-1 ring-white/10 transition-transform hover:scale-[1.02] duration-500">
                             <Image
                                 src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : "https://via.placeholder.com/500x750?text=No+Poster"}
                                 alt={movie.title}
@@ -131,38 +132,41 @@ const MovieDetailsPage = () => {
                         </div>
                     </div>
 
-                    {/* Overview Column */}
-                    <div className="w-full md:w-2/3 lg:w-3/4">
+                    {/* Right Column: Overview + Metadata */}
+                    <div className="md:col-span-2">
+                        {/* Genres always visible */}
                         <div className="flex flex-wrap gap-2 mb-8">
                             {movie.genres.map((genre) => (
                                 <span
                                     key={genre.id}
-                                    className="bg-blue-600/10 text-blue-600 dark:text-blue-400 px-5 py-2 rounded-full text-xs md:text-sm font-bold border border-blue-500/20 backdrop-blur-sm"
+                                    className="bg-blue-600/10 text-blue-600 dark:text-blue-400 px-5 py-2 rounded-full text-xs md:text-sm font-bold border border-blue-500/10 backdrop-blur-sm"
                                 >
                                     {genre.name}
                                 </span>
                             ))}
                         </div>
 
-                        <h2 className="text-3xl font-bold mb-6 border-b border-gray-200 dark:border-gray-800 pb-4">Overview</h2>
-                        <p className="text-lg md:text-xl leading-relaxed text-gray-700 dark:text-gray-300 antialiased font-medium">
+                        <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white border-b border-gray-100 dark:border-gray-800 pb-4">
+                            Overview
+                        </h2>
+                        <p className="text-lg md:text-xl leading-relaxed text-gray-700 dark:text-gray-300 antialiased font-medium mb-12">
                             {movie.overview || "No overview available for this movie."}
                         </p>
 
-                        <div className="mt-12 grid grid-cols-2 lg:grid-cols-4 gap-6">
-                            <div className="p-6 bg-gray-50 dark:bg-gray-900/50 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm transition-all hover:bg-gray-100 dark:hover:bg-gray-900 border-l-4 border-l-blue-600">
+                        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                            <div className="p-6 bg-gray-50 dark:bg-gray-900/40 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm transition-all hover:border-blue-500/30">
                                 <h4 className="text-gray-400 dark:text-gray-500 uppercase text-[10px] font-black tracking-[0.2em] mb-2">Status</h4>
                                 <p className="text-gray-950 dark:text-white font-bold uppercase tracking-wide">Released</p>
                             </div>
-                            <div className="p-6 bg-gray-50 dark:bg-gray-900/50 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm transition-all hover:bg-gray-100 dark:hover:bg-gray-900 border-l-4 border-l-blue-600">
+                            <div className="p-6 bg-gray-50 dark:bg-gray-900/40 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm transition-all hover:border-blue-500/30">
                                 <h4 className="text-gray-400 dark:text-gray-500 uppercase text-[10px] font-black tracking-[0.2em] mb-2">Language</h4>
                                 <p className="text-gray-950 dark:text-white font-bold uppercase tracking-wide">English</p>
                             </div>
-                            <div className="p-6 bg-gray-50 dark:bg-gray-900/50 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm transition-all hover:bg-gray-100 dark:hover:bg-gray-900 border-l-4 border-l-blue-600">
+                            <div className="p-6 bg-gray-50 dark:bg-gray-900/40 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm transition-all hover:border-blue-500/30">
                                 <h4 className="text-gray-400 dark:text-gray-500 uppercase text-[10px] font-black tracking-[0.2em] mb-2">Runtime</h4>
                                 <p className="text-gray-950 dark:text-white font-bold uppercase tracking-wide">{movie.runtime}m</p>
                             </div>
-                            <div className="p-6 bg-gray-50 dark:bg-gray-900/50 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm transition-all hover:bg-gray-100 dark:hover:bg-gray-900 border-l-4 border-l-blue-600">
+                            <div className="p-6 bg-gray-50 dark:bg-gray-900/40 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm transition-all hover:border-blue-500/30">
                                 <h4 className="text-gray-400 dark:text-gray-500 uppercase text-[10px] font-black tracking-[0.2em] mb-2">Rating</h4>
                                 <p className="text-gray-950 dark:text-white font-bold uppercase tracking-wide">{movie.vote_average.toFixed(1)}</p>
                             </div>
@@ -171,7 +175,6 @@ const MovieDetailsPage = () => {
                 </div>
             </div>
 
-            {/* bottom spacing */}
             <div className="h-24"></div>
         </>
     );
