@@ -65,3 +65,20 @@ export const getMovieDetails = async (id: string): Promise<MovieDetails> => {
         throw error;
     }
 };
+export const searchMovies = async (query: string): Promise<Movie[]> => {
+    try {
+        const response = await axios.get<MovieResponse>(
+            `${BASE_URL}/search/movie`,
+            {
+                params: {
+                    api_key: API_KEY,
+                    query: query,
+                },
+            }
+        );
+        return response.data.results;
+    } catch (error) {
+        console.error(`Error searching movies for query ${query}:`, error);
+        throw error;
+    }
+};
