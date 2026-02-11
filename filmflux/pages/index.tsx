@@ -41,7 +41,6 @@ export default function Home() {
           Explore the most popular films around the world right now.
         </p>
       </header>
-      {/* ... rest of the content ... */}
 
       {loading && (
         <div className="flex flex-col items-center justify-center py-20">
