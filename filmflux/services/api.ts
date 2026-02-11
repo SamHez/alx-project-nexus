@@ -16,6 +16,18 @@ export interface Movie {
     overview: string;
 }
 
+export interface Genre {
+    id: number;
+    name: string;
+}
+
+export interface MovieDetails extends Movie {
+    backdrop_path: string;
+    runtime: number;
+    genres: Genre[];
+    tagline: string;
+}
+
 interface MovieResponse {
     results: Movie[];
 }
@@ -33,6 +45,23 @@ export const fetchTrendingMovies = async (): Promise<Movie[]> => {
         return response.data.results;
     } catch (error) {
         console.error("Error fetching trending movies:", error);
+        throw error;
+    }
+};
+
+export const getMovieDetails = async (id: string): Promise<MovieDetails> => {
+    try {
+        const response = await axios.get<MovieDetails>(
+            `${BASE_URL}/movie/${id}`,
+            {
+                params: {
+                    api_key: API_KEY,
+                },
+            }
+        );
+        return response.data;
+    } catch (error) {
+        console.error(`Error fetching movie details for id ${id}:`, error);
         throw error;
     }
 };
