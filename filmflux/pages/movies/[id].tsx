@@ -61,7 +61,7 @@ const MovieDetailsPage = () => {
             </Head>
 
             {/* Section 1: Cinematic Backdrop Hero */}
-            <section className="relative h-[60vh] md:h-[75vh] w-full overflow-hidden bg-gray-900">
+            <section className="relative h-[65vh] md:h-[80vh] w-full overflow-hidden bg-gray-900">
                 {movie.backdrop_path && (
                     <Image
                         src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
@@ -71,30 +71,33 @@ const MovieDetailsPage = () => {
                         className="object-cover opacity-60 dark:opacity-40"
                     />
                 )}
-                {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/20 to-transparent"></div>
+                {/* Enhanced Gradient Overlay with subtle blur */}
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/40 to-transparent backdrop-blur-[2px]"></div>
 
                 {/* Hero Content - Clean Alignment */}
-                <div className="absolute inset-0 flex items-end pb-12">
+                <div className="absolute inset-0 flex items-end pb-16">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-                        <div className="flex flex-wrap items-center gap-3 mb-4">
-                            <span className="bg-yellow-500 text-black font-extrabold px-3 py-1 rounded-md text-sm shadow-lg">
-                                ★ {movie.vote_average.toFixed(1)}
+                        <div className="flex flex-wrap items-center gap-4 mb-6">
+                            <span className="bg-yellow-500 text-black font-black px-4 py-1.5 rounded-lg text-sm shadow-xl flex items-center gap-1.5">
+                                <span className="text-lg">★</span> {movie.vote_average.toFixed(1)}
                             </span>
-                            <span className="text-gray-200 font-bold drop-shadow-md">
-                                {movie.release_date.split("-")[0]}
-                            </span>
-                            <span className="text-gray-200 font-bold drop-shadow-md">
-                                {Math.floor(movie.runtime / 60)}h {movie.runtime % 60}m
-                            </span>
+                            <div className="flex items-center gap-3 text-gray-200 font-bold drop-shadow-md">
+                                <span className="bg-white/10 backdrop-blur-md px-3 py-1 rounded-md border border-white/10">
+                                    {movie.release_date.split("-")[0]}
+                                </span>
+                                <span className="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
+                                <span className="bg-white/10 backdrop-blur-md px-3 py-1 rounded-md border border-white/10">
+                                    {Math.floor(movie.runtime / 60)}h {movie.runtime % 60}m
+                                </span>
+                            </div>
                         </div>
 
-                        <h1 className="text-4xl md:text-7xl font-black mb-4 drop-shadow-2xl tracking-tighter text-white">
+                        <h1 className="text-5xl md:text-8xl font-black mb-6 drop-shadow-2xl tracking-tighter text-white leading-tight">
                             {movie.title}
                         </h1>
 
                         {movie.tagline && (
-                            <p className="text-lg md:text-2xl italic text-blue-400 font-semibold mb-6 drop-shadow-lg max-w-4xl">
+                            <p className="text-xl md:text-3xl italic text-blue-400 font-bold mb-8 drop-shadow-lg max-w-4xl opacity-90">
                                 {movie.tagline}
                             </p>
                         )}
