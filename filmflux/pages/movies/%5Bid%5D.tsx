@@ -124,13 +124,13 @@ const MovieDetailsPage = () => {
                 </div>
 
                 {/* Details Section */}
-                <div className="container mx-auto px-6 md:px-12 py-12">
+                <div className="container mx-auto px-6 md:px-12 py-12 animate-in fade-in duration-700">
                     <div className="flex flex-col md:flex-row gap-12">
                         {/* Poster Column */}
                         <div className="w-full md:w-1/3 lg:w-1/4 flex-shrink-0">
                             <div className="relative h-[450px] w-full rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] border border-gray-800 transform -mt-20 md:-mt-32 z-10">
                                 <Image
-                                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                                    src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : "https://via.placeholder.com/500x750?text=No+Poster"}
                                     alt={movie.title}
                                     fill
                                     className="object-cover"
@@ -142,19 +142,26 @@ const MovieDetailsPage = () => {
                         <div className="w-full md:w-2/3 lg:w-3/4">
                             <h2 className="text-3xl font-bold mb-6 border-b border-gray-800 pb-4">Overview</h2>
                             <p className="text-lg md:text-xl leading-relaxed text-gray-300 antialiased">
-                                {movie.overview}
+                                {movie.overview || "No overview available for this movie."}
                             </p>
 
-                            <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-8">
-                                <div>
+                            <div className="mt-12 grid grid-cols-2 lg:grid-cols-4 gap-8">
+                                <div className="p-4 bg-gray-900/50 rounded-xl border border-gray-800 shadow-sm">
                                     <h4 className="text-gray-500 uppercase text-xs font-bold tracking-widest mb-1">Status</h4>
-                                    <p className="text-blue-400 font-semibold">Released</p>
+                                    <p className="text-blue-400 font-semibold italic">Released</p>
                                 </div>
-                                <div>
-                                    <h4 className="text-gray-500 uppercase text-xs font-bold tracking-widest mb-1">Original Language</h4>
-                                    <p className="text-blue-400 font-semibold uppercase">English</p>
+                                <div className="p-4 bg-gray-900/50 rounded-xl border border-gray-800 shadow-sm">
+                                    <h4 className="text-gray-500 uppercase text-xs font-bold tracking-widest mb-1">Language</h4>
+                                    <p className="text-blue-400 font-semibold uppercase italic">English</p>
                                 </div>
-                                {/* Additional metadata could go here */}
+                                <div className="p-4 bg-gray-900/50 rounded-xl border border-gray-800 shadow-sm">
+                                    <h4 className="text-gray-500 uppercase text-xs font-bold tracking-widest mb-1">Runtime</h4>
+                                    <p className="text-blue-400 font-semibold italic">{movie.runtime} min</p>
+                                </div>
+                                <div className="p-4 bg-gray-900/50 rounded-xl border border-gray-800 shadow-sm">
+                                    <h4 className="text-gray-500 uppercase text-xs font-bold tracking-widest mb-1">Rating</h4>
+                                    <p className="text-blue-400 font-semibold italic">{movie.vote_average.toFixed(1)} / 10</p>
+                                </div>
                             </div>
                         </div>
                     </div>
