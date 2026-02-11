@@ -25,7 +25,7 @@ export default function Home() {
   }, []);
 
   return (
-    <>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       <Head>
         <title>FilmFlux | Trending Movies</title>
         <meta name="description" content="Discover the latest trending movies on FilmFlux." />
@@ -41,6 +41,7 @@ export default function Home() {
           Explore the most popular films around the world right now.
         </p>
       </header>
+      {/* ... rest of the content ... */}
 
       {loading && (
         <div className="flex flex-col items-center justify-center py-20">
@@ -71,6 +72,6 @@ export default function Home() {
       {!loading && !error && movies.length > 0 && (
         <MovieList movies={movies} />
       )}
-    </>
+    </div>
   );
 }

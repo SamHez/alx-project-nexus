@@ -53,69 +53,70 @@ const MovieDetailsPage = () => {
     }
 
     return (
-        <div className="font-sans">
+        <>
             <Head>
                 <title>{movie.title} | FilmFlux</title>
                 <meta name="description" content={movie.overview} />
             </Head>
 
-            <section className="relative h-[55vh] md:h-[75vh] -mx-4 sm:-mx-6 lg:-mx-8 -mt-8 overflow-hidden">
+            {/* Hero Backdrop Section - Naturally full width now */}
+            <section className="relative h-[70vh] md:h-[90vh] overflow-hidden bg-gray-900">
                 {movie.backdrop_path && (
                     <Image
                         src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
                         alt={movie.title}
                         fill
                         priority
-                        className="object-cover"
+                        className="object-cover opacity-60 dark:opacity-50"
                     />
                 )}
                 {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/20 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/40 to-transparent"></div>
 
-                {/* Hero Content */}
-                <div className="absolute bottom-0 left-0 w-full p-6 md:p-12">
+                {/* Hero Content - Moved up to clear the poster overlap */}
+                <div className="absolute inset-x-0 bottom-0 pb-32 md:pb-64 px-4 sm:px-6 lg:px-8">
                     <div className="max-w-7xl mx-auto">
-                        <div className="flex flex-wrap items-center gap-3 mb-4">
+                        <div className="flex flex-wrap items-center gap-3 mb-6">
                             <span className="bg-yellow-500 text-black font-extrabold px-3 py-1 rounded-md text-sm shadow-lg">
                                 ★ {movie.vote_average.toFixed(1)}
                             </span>
-                            <span className="text-gray-300 font-semibold drop-shadow-md">
+                            <span className="text-gray-200 font-bold drop-shadow-md">
                                 {movie.release_date.split("-")[0]}
                             </span>
-                            <span className="text-gray-300 font-semibold drop-shadow-md">
+                            <span className="text-gray-200 font-bold drop-shadow-md">
                                 {Math.floor(movie.runtime / 60)}h {movie.runtime % 60}m
                             </span>
                         </div>
 
-                        <h1 className="text-5xl md:text-8xl font-black mb-4 drop-shadow-2xl tracking-tighter text-white">
+                        <h1 className="text-5xl md:text-8xl font-black mb-6 drop-shadow-3xl tracking-tighter text-white">
                             {movie.title}
                         </h1>
 
                         {movie.tagline && (
-                            <p className="text-xl md:text-3xl italic text-blue-400 font-medium mb-4 drop-shadow-lg">
+                            <p className="text-xl md:text-3xl italic text-blue-400 font-semibold mb-6 drop-shadow-lg max-w-4xl">
                                 {movie.tagline}
                             </p>
                         )}
                     </div>
                 </div>
 
-                {/* Mobile Back Button */}
+                {/* Back Button */}
                 <button
                     onClick={() => router.back()}
-                    className="absolute top-6 left-6 z-20 p-2.5 bg-black/50 backdrop-blur-md rounded-full hover:bg-black/70 transition-all border border-white/10 text-white"
+                    className="absolute top-8 left-8 z-20 p-3 bg-black/50 backdrop-blur-md rounded-full hover:bg-black/70 transition-all border border-white/20 text-white shadow-xl"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                     </svg>
                 </button>
             </section>
 
-            {/* Details Section */}
-            <div className="py-12 animate-in fade-in slide-in-from-bottom-5 duration-1000">
+            {/* Details Section - Added Container */}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 animate-in fade-in slide-in-from-bottom-5 duration-1000">
                 <div className="flex flex-col md:flex-row gap-12">
                     {/* Poster Column */}
                     <div className="w-full md:w-1/3 lg:w-1/4 flex-shrink-0">
-                        <div className="relative h-[480px] w-full rounded-2xl overflow-hidden shadow-2xl border border-gray-800 transform -mt-24 md:-mt-48 z-10 transition-transform hover:scale-[1.02] duration-500">
+                        <div className="relative h-[480px] w-full rounded-2xl overflow-hidden shadow-2xl border border-gray-100/10 dark:border-gray-800 transform -mt-24 md:-mt-56 z-10 transition-transform hover:scale-[1.02] duration-500 ring-1 ring-white/10">
                             <Image
                                 src={movie.poster_path ? `https://image.tmdb.org/t/p/w500${movie.poster_path}` : "https://via.placeholder.com/500x750?text=No+Poster"}
                                 alt={movie.title}
@@ -131,7 +132,7 @@ const MovieDetailsPage = () => {
                             {movie.genres.map((genre) => (
                                 <span
                                     key={genre.id}
-                                    className="bg-blue-600/10 text-blue-500 dark:bg-blue-400/10 dark:text-blue-400 px-5 py-2 rounded-full text-xs md:text-sm font-bold border border-blue-500/20"
+                                    className="bg-blue-600/10 text-blue-600 dark:text-blue-400 px-5 py-2 rounded-full text-xs md:text-sm font-bold border border-blue-500/20 backdrop-blur-sm"
                                 >
                                     {genre.name}
                                 </span>
@@ -144,29 +145,35 @@ const MovieDetailsPage = () => {
                         </p>
 
                         <div className="mt-12 grid grid-cols-2 lg:grid-cols-4 gap-6">
-                            <div className="p-5 bg-gray-50 dark:bg-gray-900/50 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm transition-colors hover:bg-gray-100 dark:hover:bg-gray-900 border-l-4 border-l-blue-500">
+                            <div className="p-6 bg-gray-50 dark:bg-gray-900/50 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm transition-all hover:bg-gray-100 dark:hover:bg-gray-900 border-l-4 border-l-blue-600">
                                 <h4 className="text-gray-400 dark:text-gray-500 uppercase text-[10px] font-black tracking-[0.2em] mb-2">Status</h4>
-                                <p className="text-gray-900 dark:text-white font-bold uppercase tracking-wide">Released</p>
+                                <p className="text-gray-950 dark:text-white font-bold uppercase tracking-wide">Released</p>
                             </div>
-                            <div className="p-5 bg-gray-50 dark:bg-gray-900/50 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm transition-colors hover:bg-gray-100 dark:hover:bg-gray-900 border-l-4 border-l-blue-500">
+                            <div className="p-6 bg-gray-50 dark:bg-gray-900/50 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm transition-all hover:bg-gray-100 dark:hover:bg-gray-900 border-l-4 border-l-blue-600">
                                 <h4 className="text-gray-400 dark:text-gray-500 uppercase text-[10px] font-black tracking-[0.2em] mb-2">Language</h4>
-                                <p className="text-gray-900 dark:text-white font-bold uppercase tracking-wide">English</p>
+                                <p className="text-gray-950 dark:text-white font-bold uppercase tracking-wide">English</p>
                             </div>
-                            <div className="p-5 bg-gray-50 dark:bg-gray-900/50 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm transition-colors hover:bg-gray-100 dark:hover:bg-gray-900 border-l-4 border-l-blue-500">
+                            <div className="p-6 bg-gray-50 dark:bg-gray-900/50 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm transition-all hover:bg-gray-100 dark:hover:bg-gray-900 border-l-4 border-l-blue-600">
                                 <h4 className="text-gray-400 dark:text-gray-500 uppercase text-[10px] font-black tracking-[0.2em] mb-2">Runtime</h4>
-                                <p className="text-gray-900 dark:text-white font-bold uppercase tracking-wide">{movie.runtime}m</p>
+                                <p className="text-gray-950 dark:text-white font-bold uppercase tracking-wide">{movie.runtime}m</p>
                             </div>
-                            <div className="p-5 bg-gray-50 dark:bg-gray-900/50 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm transition-colors hover:bg-gray-100 dark:hover:bg-gray-900 border-l-4 border-l-blue-500">
+                            <div className="p-6 bg-gray-50 dark:bg-gray-900/50 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm transition-all hover:bg-gray-100 dark:hover:bg-gray-900 border-l-4 border-l-blue-600">
                                 <h4 className="text-gray-400 dark:text-gray-500 uppercase text-[10px] font-black tracking-[0.2em] mb-2">Rating</h4>
-                                <p className="text-gray-900 dark:text-white font-bold uppercase tracking-wide">{movie.vote_average.toFixed(1)}</p>
+                                <p className="text-gray-950 dark:text-white font-bold uppercase tracking-wide">{movie.vote_average.toFixed(1)}</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            {/* simple spacing at the bottom */}
-            <div className="h-20"></div>
-        </div>
+
+            {/* bottom spacing */}
+            <div className="h-24"></div>
+        </>
+    );
+};
+{/* simple spacing at the bottom */ }
+<div className="h-20"></div>
+        </div >
     );
 };
 
