@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { fetchTrendingMovies, searchMovies, Movie } from "../services/api";

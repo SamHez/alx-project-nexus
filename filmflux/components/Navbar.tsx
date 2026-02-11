@@ -82,8 +82,21 @@ const Navbar = () => {
                                 value={searchQuery}
                                 onChange={handleSearchChange}
                                 placeholder="Search movies..."
-                                className="w-full bg-gray-100 dark:bg-gray-900 border border-transparent focus:border-blue-500/50 rounded-full py-2 pl-10 pr-4 focus:ring-4 focus:ring-blue-500/10 transition-all outline-none text-sm text-gray-900 dark:text-gray-100 placeholder-gray-500"
+                                className="w-full bg-gray-100 dark:bg-gray-900 border border-transparent focus:border-blue-500/50 rounded-full py-2 pl-10 pr-10 focus:ring-4 focus:ring-blue-500/10 transition-all outline-none text-sm text-gray-900 dark:text-gray-100 placeholder-gray-500"
                             />
+                            {searchQuery && (
+                                <button
+                                    onClick={() => {
+                                        setSearchQuery("");
+                                        router.push("/");
+                                    }}
+                                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-blue-500 transition-colors"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            )}
                         </div>
                     </div>
 
