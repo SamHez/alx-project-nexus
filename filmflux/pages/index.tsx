@@ -81,16 +81,30 @@ export default function Home() {
       )}
 
       {!loading && !error && movies.length === 0 && (
-        <div className="flex flex-col items-center justify-center py-20 text-center">
-          <div className="bg-gray-100 dark:bg-gray-900 p-8 rounded-full mb-6 text-gray-400">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        <div className="flex flex-col items-center justify-center py-24 text-center animate-in fade-in zoom-in duration-700">
+          <div className="bg-gray-100 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-10 rounded-full mb-8 shadow-inner">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-20 w-20 text-gray-400 dark:text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </div>
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">No results found</h2>
-          <p className="text-gray-600 dark:text-gray-400 max-w-md">
-            We couldn't find any movies matching "{search}". Try searching for something else.
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4 tracking-tight">No results found</h2>
+          <p className="text-gray-600 dark:text-gray-400 max-w-sm text-lg font-medium leading-relaxed mb-8">
+            We couldn't find any cinematic masterpieces matching <span className="text-blue-600 dark:text-blue-400 font-bold">"{search}"</span>.
           </p>
+          <div className="flex flex-col gap-3">
+            <p className="text-sm font-black uppercase tracking-widest text-gray-400 mb-2">Try searching for:</p>
+            <div className="flex flex-wrap justify-center gap-2">
+              {["Inception", "The Dark Knight", "Pulp Fiction", "Avengers"].map((s) => (
+                <button
+                  key={s}
+                  onClick={() => router.push(`/?search=${s}`)}
+                  className="px-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg text-sm font-bold hover:border-blue-500 transition-colors shadow-sm"
+                >
+                  {s}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       )}
 
