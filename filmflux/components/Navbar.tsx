@@ -1,8 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { debounce } from "../utils/debounce";
 
 const Navbar = () => {
+    const router = useRouter();
     const [isDarkMode, setIsDarkMode] = useState(false);
+    const [searchQuery, setSearchQuery] = useState("");
 
     useEffect(() => {
         // Initialize theme based on preference or system
@@ -15,6 +19,32 @@ const Navbar = () => {
             document.documentElement.classList.remove("dark");
         }
     }, []);
+
+    // Sync input with URL search param on mount or back navigation
+    useEffect(() => {
+        if (router.query.search) {
+            setSearchQuery(router.query.search as string);
+        } else {
+            setSearchQuery("");
+        }
+    }, [router.query.search]);
+
+    const debouncedSearch = useMemo(
+        () => debounce((query: string) => {
+            if (query.trim().length > 2) {
+                router.push(`/?search=${encodeURIComponent(query)}`);
+            } else if (query.trim().length === 0) {
+                router.push("/");
+            }
+        }, 500),
+        [router]
+    );
+
+    const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const query = e.target.value;
+        setSearchQuery(query);
+        debouncedSearch(query);
+    };
 
     const toggleTheme = () => {
         const newMode = !isDarkMode;
@@ -49,6 +79,8 @@ const Navbar = () => {
                             </div>
                             <input
                                 type="text"
+                                value={searchQuery}
+                                onChange={handleSearchChange}
                                 placeholder="Search movies..."
                                 className="w-full bg-gray-100 dark:bg-gray-900 border border-transparent focus:border-blue-500/50 rounded-full py-2 pl-10 pr-4 focus:ring-4 focus:ring-blue-500/10 transition-all outline-none text-sm text-gray-900 dark:text-gray-100 placeholder-gray-500"
                             />
