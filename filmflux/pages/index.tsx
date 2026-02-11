@@ -25,7 +25,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-sans transition-colors duration-300">
+    <>
       <Head>
         <title>FilmFlux | Trending Movies</title>
         <meta name="description" content="Discover the latest trending movies on FilmFlux." />
@@ -33,46 +33,44 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="container mx-auto px-4 py-8">
-        <header className="mb-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 mb-2">
-            FilmFlux
-          </h1>
-          <p className="text-lg text-gray-600 dark:text-gray-400">
-            Your daily dose of trending cinema.
-          </p>
-        </header>
+      <header className="mb-12 text-center">
+        <h1 className="text-5xl md:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 mb-4 tracking-tight">
+          Trending Movies
+        </h1>
+        <p className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          Explore the most popular films around the world right now.
+        </p>
+      </header>
 
-        {loading && (
-          <div className="flex flex-col items-center justify-center h-64">
-            <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500 mb-4"></div>
-            <p className="text-xl text-gray-600 dark:text-gray-400 animate-pulse">Loading movies...</p>
-          </div>
-        )}
+      {loading && (
+        <div className="flex flex-col items-center justify-center py-20">
+          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500 mb-4"></div>
+          <p className="text-xl text-gray-600 dark:text-gray-400 animate-pulse">Loading movies...</p>
+        </div>
+      )}
 
-        {error && (
-          <div className="flex flex-col items-center justify-center h-64 text-center">
-            <div className="text-red-500 text-6xl mb-4">⚠️</div>
-            <p className="text-xl text-red-500 font-semibold">{error}</p>
-            <button
-              onClick={() => window.location.reload()}
-              className="mt-4 px-6 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors"
-            >
-              Retry
-            </button>
-          </div>
-        )}
+      {error && (
+        <div className="flex flex-col items-center justify-center py-20 text-center">
+          <div className="text-red-500 text-6xl mb-4">⚠️</div>
+          <p className="text-xl text-red-500 font-semibold">{error}</p>
+          <button
+            onClick={() => window.location.reload()}
+            className="mt-6 px-8 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-all shadow-lg hover:shadow-blue-500/20"
+          >
+            Retry
+          </button>
+        </div>
+      )}
 
-        {!loading && !error && movies.length === 0 && (
-          <div className="text-center py-20">
-            <p className="text-xl text-gray-500">No trending movies found at the moment.</p>
-          </div>
-        )}
+      {!loading && !error && movies.length === 0 && (
+        <div className="text-center py-20">
+          <p className="text-xl text-gray-500">No trending movies found at the moment.</p>
+        </div>
+      )}
 
-        {!loading && !error && movies.length > 0 && (
-          <MovieList movies={movies} />
-        )}
-      </main>
-    </div>
+      {!loading && !error && movies.length > 0 && (
+        <MovieList movies={movies} />
+      )}
+    </>
   );
 }
