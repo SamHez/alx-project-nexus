@@ -9,7 +9,7 @@ interface MovieCardProps {
 
 const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
     return (
-        <div className="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transform hover:-translate-y-2 transition-all duration-500 cursor-pointer border border-gray-100 dark:border-gray-700">
+        <div className="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl transform hover:scale-[1.03] transition-all duration-300 ease-out cursor-pointer border border-gray-100 dark:border-gray-700/50 hover:border-blue-500/30">
             <Link href={`/movies/${movie.id}`}>
                 <div className="relative h-[400px] w-full">
                     <Image
@@ -21,7 +21,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ movie }) => {
                         alt={movie.title}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                        className="object-cover transition-all duration-500 group-hover:scale-110 group-hover:brightness-75"
                     />
                     {/* Gradient Overlay */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>

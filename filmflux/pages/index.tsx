@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { fetchTrendingMovies, searchMovies, Movie } from "../services/api";
 import MovieList from "../components/MovieList";
+import SkeletonCard from "../components/SkeletonCard";
 
 export default function Home() {
   const router = useRouter();
@@ -59,9 +60,10 @@ export default function Home() {
       </header>
 
       {loading && (
-        <div className="flex flex-col items-center justify-center py-20">
-          <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500 mb-4"></div>
-          <p className="text-xl text-gray-600 dark:text-gray-400 animate-pulse">Loading movies...</p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          {[...Array(8)].map((_, i) => (
+            <SkeletonCard key={i} />
+          ))}
         </div>
       )}
 
