@@ -16,15 +16,15 @@ export default function WatchlistPage() {
             {/* Watchlist Hero */}
             <section className="relative w-full py-16 md:py-20 overflow-hidden border-b border-gray-100 dark:border-gray-800/50">
                 {/* Dynamic Background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-900/10 via-transparent to-purple-900/10 dark:from-blue-900/20 dark:via-[#050505] dark:to-purple-900/20"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-white to-purple-500/10 dark:from-blue-900/20 dark:via-[#050505] dark:to-purple-900/20 transition-all duration-700"></div>
 
                 {/* Glow Accents */}
-                <div className="absolute top-1/2 -left-20 w-64 h-64 bg-blue-500/10 rounded-full blur-[100px] pointer-events-none"></div>
-                <div className="absolute top-1/2 -right-20 w-64 h-64 bg-purple-500/10 rounded-full blur-[100px] pointer-events-none"></div>
+                <div className="absolute top-1/2 -left-20 w-64 h-64 bg-blue-400/10 dark:bg-blue-500/10 rounded-full blur-[100px] pointer-events-none"></div>
+                <div className="absolute top-1/2 -right-20 w-64 h-64 bg-purple-400/10 dark:bg-purple-500/10 rounded-full blur-[100px] pointer-events-none"></div>
 
                 <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center md:text-left">
                     <h1 className="text-5xl md:text-6xl font-black mb-4 tracking-tighter animate-in fade-in slide-in-from-left-8 duration-700">
-                        <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(59,130,246,0.3)]">
+                        <span className="bg-gradient-to-r from-blue-500 to-purple-600 dark:from-blue-400 dark:to-purple-500 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(59,130,246,0.2)] dark:drop-shadow-[0_0_15px_rgba(59,130,246,0.3)]">
                             My Watchlist
                         </span>
                     </h1>

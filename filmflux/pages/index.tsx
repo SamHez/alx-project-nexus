@@ -79,19 +79,19 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative w-full py-16 md:py-24 overflow-hidden">
         {/* Dynamic Background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-black to-purple-900/20 dark:from-blue-900/30 dark:via-[#050505] dark:to-purple-900/30 transition-all duration-700"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-white to-purple-500/10 dark:from-blue-900/30 dark:via-[#050505] dark:to-purple-900/30 transition-all duration-700"></div>
 
         {/* Pattern Overlay */}
-        <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none"
+        <div className="absolute inset-0 opacity-[0.05] dark:opacity-[0.05] pointer-events-none text-blue-900/20 dark:text-white"
           style={{ backgroundImage: `radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)`, backgroundSize: '32px 32px' }}></div>
 
         {/* Glow Accents */}
-        <div className="absolute top-1/4 -left-20 w-80 h-80 bg-blue-500/20 rounded-full blur-[120px] pointer-events-none"></div>
-        <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-purple-500/20 rounded-full blur-[120px] pointer-events-none"></div>
+        <div className="absolute top-1/4 -left-20 w-80 h-80 bg-blue-400/10 dark:bg-blue-500/20 rounded-full blur-[120px] pointer-events-none"></div>
+        <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-purple-400/10 dark:bg-purple-500/20 rounded-full blur-[120px] pointer-events-none"></div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
           <h1 className="text-6xl md:text-8xl font-black mb-6 tracking-tighter animate-in fade-in slide-in-from-bottom-8 duration-700">
-            <span className="bg-gradient-to-r from-blue-400 via-blue-500 to-purple-600 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(59,130,246,0.5)]">
+            <span className="bg-gradient-to-r from-blue-500 via-blue-600 to-purple-600 dark:from-blue-400 dark:via-blue-500 dark:to-purple-600 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(59,130,246,0.3)] dark:drop-shadow-[0_0_25px_rgba(59,130,246,0.5)]">
               FILMFLUX
             </span>
           </h1>
