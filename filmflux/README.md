@@ -13,18 +13,17 @@ From an engineering perspective, this project demonstrates my ability to:
 - Orchestrate complex **API Integrations** with proper error handling and optimization.
 
 ## Live Demo
-> [!NOTE]
-> **Live Demo:** (to be added after Netlify deployment)
+[FilmFlux - Live Deployment](https://filmflux-alx.netlify.app/)
 
 ## Features
+- **Gradient Hero Section:** A striking, animated hero area with dynamic gradients and glow effects.
+- **16:9 Featured “Top Picks”:** A high-impact row highlighting top-rated movies in panoramic format.
 - **Browse Trending & Popular Movies:** Catch up with what's hot and what's trending globally.
-- **Recommended Movies:** Intelligent suggestions based on the current movie being viewed.
 - **Dynamic Movie Details:** Deep-dive into movie overviews, ratings, and release dates.
-- **Powerful Search:** Instant search functionality to find specific titles across the database.
-- **Persistent Watchlist:** Save your "must-watch" movies. Data persists in `localStorage` so it's there even after a refresh.
-- **Smart Theme Engine:** Automatically detects and follows your system browser preference (Light/Dark) with a manual toggle for direct control.
-- **Responsive Design:** Optimized for everything from mobile phones up to Ultra-Wide monitors.
-- **Performance Optimized:** Leveraging Next.js Image component for lazy loading and efficient asset delivery.
+- **Powerful Search:** Instant search functionality in the hero and navigation bar.
+- **Persistent Watchlist:** Save your "must-watch" movies using `localStorage`.
+- **Light/Dark Mode Toggle:** Smart theme engine that auto-detects system preferences.
+- **Responsive Design:** Optimized for all screen sizes.
 
 ## Tech Stack
 - **Next.js (Pages Router):** Chosen for its excellent routing system and built-in performance features.
