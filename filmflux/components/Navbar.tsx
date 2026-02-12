@@ -2,23 +2,12 @@ import React, { useEffect, useState, useMemo } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { debounce } from "../utils/debounce";
+import { useTheme } from "@/contexts/ThemeContext";
 
 const Navbar = () => {
     const router = useRouter();
-    const [isDarkMode, setIsDarkMode] = useState(false);
+    const { theme, setTheme, resolvedTheme } = useTheme();
     const [searchQuery, setSearchQuery] = useState("");
-
-    useEffect(() => {
-        // Initialize theme based on preference or system
-        const savedTheme = localStorage.getItem("theme");
-        const isDark = savedTheme === "dark" || (!savedTheme && window.matchMedia("(prefers-color-scheme: dark)").matches);
-        setIsDarkMode(isDark);
-        if (isDark) {
-            document.documentElement.classList.add("dark");
-        } else {
-            document.documentElement.classList.remove("dark");
-        }
-    }, []);
 
     // Sync input with URL search param on mount or back navigation
     useEffect(() => {
@@ -46,16 +35,10 @@ const Navbar = () => {
         debouncedSearch(query);
     };
 
-    const toggleTheme = () => {
-        const newMode = !isDarkMode;
-        setIsDarkMode(newMode);
-        if (newMode) {
-            document.documentElement.classList.add("dark");
-            localStorage.setItem("theme", "dark");
-        } else {
-            document.documentElement.classList.remove("dark");
-            localStorage.setItem("theme", "light");
-        }
+    const cycleTheme = () => {
+        if (theme === "system") setTheme("light");
+        else if (theme === "light") setTheme("dark");
+        else setTheme("system");
     };
 
     return (
@@ -107,19 +90,29 @@ const Navbar = () => {
                         </Link>
 
                         <button
-                            onClick={toggleTheme}
-                            className="p-2.5 rounded-xl bg-gray-100 dark:bg-gray-900 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-800 transition-all active:scale-95 shadow-sm border border-transparent dark:border-gray-800"
+                            onClick={cycleTheme}
+                            className="flex items-center space-x-2 p-2 rounded-xl bg-gray-100 dark:bg-gray-900 text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-800 transition-all active:scale-95 shadow-sm border border-transparent dark:border-gray-800 overflow-hidden"
                             aria-label="Toggle Theme"
+                            title={`Current: ${theme === 'system' ? 'System (' + resolvedTheme + ')' : theme.charAt(0).toUpperCase() + theme.slice(1)}`}
                         >
-                            {isDarkMode ? (
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 fill-yellow-500" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
-                                </svg>
-                            ) : (
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 fill-blue-600" viewBox="0 0 20 20" fill="currentColor">
-                                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
-                                </svg>
-                            )}
+                            <div className="relative w-5 h-5">
+                                {theme === "system" ? (
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 21h6l-.75-4M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                    </svg>
+                                ) : resolvedTheme === "dark" ? (
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 fill-yellow-500" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
+                                    </svg>
+                                ) : (
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 fill-blue-600" viewBox="0 0 20 20" fill="currentColor">
+                                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                                    </svg>
+                                )}
+                            </div>
+                            <span className="hidden sm:inline text-xs font-semibold uppercase tracking-wider">
+                                {theme}
+                            </span>
                         </button>
                     </div>
                 </div>
