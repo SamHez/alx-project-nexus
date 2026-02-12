@@ -157,7 +157,7 @@ export default function Home() {
                   <div className="w-1.5 h-8 bg-blue-600 rounded-full"></div>
                   <h2 className="text-3xl font-bold text-gray-900 dark:text-white tracking-tight">Our Top Picks</h2>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 lg:gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
                   {topPicks.map((movie) => (
                     <FeaturedCard key={movie.id} movie={movie} />
                   ))}
